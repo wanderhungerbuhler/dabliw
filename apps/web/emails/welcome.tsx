@@ -42,7 +42,7 @@ export function WelcomeEmail({
             </Heading>
             <Section className="my-8">
               <Img
-                src="https://storage.googleapis.com/assets.dabliw.com/d25d09b3-5e37-49c7-a84e-736c140bf15e.png"
+                src="https://storage.googleapis.com/assets.dabliw.com/87f456a3-14fa-4416-9d37-3793c12f2086.png"
                 alt="Dabliw"
                 className="max-w-[500px]"
               />
