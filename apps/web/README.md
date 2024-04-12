@@ -1,5 +1,5 @@
 <a href="https://dabliw.com">
-  <img alt="Dabliw is the future open-source open-source infrasctruture for modern marketing" src="https://storage.googleapis.com/assets.dabliw.com/d25d09b3-5e37-49c7-a84e-736c140bf15e.png">
+  <img alt="Dabliw is the future open-source open-source infrasctruture for modern marketing" src="https://storage.googleapis.com/assets.dabliw.com/959ade67-41f9-48d7-a34c-ec2d5c86275b.png">
 </a>
 
 <h3 align="center">Dabliw</h3>
