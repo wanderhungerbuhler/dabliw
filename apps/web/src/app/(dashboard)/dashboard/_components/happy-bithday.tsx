@@ -1,16 +1,16 @@
 import Image from 'next/image'
-import { useEffect, useState } from 'react'
+import { ReactNode, useEffect, useState } from 'react'
 
-import { Dialog, DialogContent } from '@/components/ui/dialog'
+import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog'
 
 import DabliwHappyBirthdayGIF from '../../../../../public/dabliw-happy-birthday.gif'
 
 export function HappyBirthday({
-  open,
-  name = 'Wander Hungerbühler',
+  name,
+  children,
 }: {
-  open: boolean
   name: string | null
+  children: ReactNode
 }) {
   const [mounted, setMounted] = useState(false)
 
@@ -21,7 +21,8 @@ export function HappyBirthday({
   if (!mounted) return null
 
   return (
-    <Dialog defaultOpen={open}>
+    <Dialog>
+      <DialogTrigger asChild>{children}</DialogTrigger>
       <DialogContent className="w-[90%]">
         <div className="mt-5 flex flex-col items-center justify-center">
           <div className="relative -mt-40">
@@ -34,7 +35,7 @@ export function HappyBirthday({
             />
           </div>
           <div className="relative flex flex-col items-center justify-center">
-            <div className="text-7xl">🎉</div>
+            <div className="animate-bounce text-7xl">🎉</div>
             <h3 className="bg-gradient-to-r from-yellow-600 via-rose-600 to-indigo-600 bg-clip-text text-2xl font-bold text-transparent">
               Happy Birthday
             </h3>

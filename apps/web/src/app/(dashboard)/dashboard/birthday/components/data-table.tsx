@@ -19,6 +19,7 @@ import {
   useReactTable,
   VisibilityState,
 } from '@tanstack/react-table'
+import { format } from 'date-fns'
 import {
   Copy,
   HeartCrack,
@@ -30,7 +31,8 @@ import {
   TrashIcon,
   User,
 } from 'lucide-react'
-import * as React from 'react'
+import { useRouter } from 'next/navigation'
+import React, { useState } from 'react'
 import { toast } from 'sonner'
 
 import { Button } from '@/components/ui/button'
@@ -54,6 +56,7 @@ import {
 } from '@/components/ui/table'
 import { verifyBirthday } from '@/utils/verifyBirthday'
 
+import { HappyBirthday } from '../../_components/happy-bithday'
 import { deleteBirthdayMutation } from '../mutation/delete-birthday-mutation'
 import { CreatePerson } from './create-birthday-person'
 import { BdayPersonProps, PersonProps } from './types'
@@ -61,6 +64,10 @@ import { UpdatePerson } from './update-birthday-person'
 
 export function DataTable({ data: dataBirthdayPerson }: BdayPersonProps) {
   const queryClient = useQueryClient()
+  const router = useRouter()
+
+  const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({})
+  const [rowSelection, setRowSelection] = useState({})
 
   const [sorting, setSorting] = React.useState<SortingState>([])
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
@@ -72,10 +79,6 @@ export function DataTable({ data: dataBirthdayPerson }: BdayPersonProps) {
     onSuccess: () => queryClient.invalidateQueries({ queryKey: ['birthday'] }),
   })
 
-  const [columnVisibility, setColumnVisibility] =
-    React.useState<VisibilityState>({})
-  const [rowSelection, setRowSelection] = React.useState({})
-
   const handleDeleteBirthdayPerson = async (person: PersonProps) => {
     if (person) {
       try {
@@ -85,6 +88,8 @@ export function DataTable({ data: dataBirthdayPerson }: BdayPersonProps) {
           toast.success(`The ${person.name} person deleted`, {
             description: 'Your person has been deleted successfully.',
           })
+
+          router.refresh()
         }
       } catch (error: any) {
         toast.error(
@@ -129,7 +134,23 @@ export function DataTable({ data: dataBirthdayPerson }: BdayPersonProps) {
           </Button>
         )
       },
-      cell: ({ row }) => <div>{verifyBirthday(row.getValue('birthDate'))}</div>,
+      cell: ({ row }) => {
+        const birthday = row.original
+        const birthdayDate = format(birthday.birthDate, 'dd-MM')
+        const currentDate = format(new Date(), 'dd-MM')
+
+        return (
+          <div className="flex gap-2">
+            {verifyBirthday(row.getValue('birthDate'))}
+
+            {birthdayDate === currentDate && (
+              <HappyBirthday name={row.getValue('name')}>
+                <div className="animate-bounce cursor-pointer">🎉</div>
+              </HappyBirthday>
+            )}
+          </div>
+        )
+      },
     },
     {
       accessorKey: 'gender',

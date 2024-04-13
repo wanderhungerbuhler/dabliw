@@ -26,6 +26,13 @@ import {
 import { Input } from '@/components/ui/input'
 import { PopoverContent, PopoverTrigger } from '@/components/ui/popover'
 import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select'
+import {
   Sheet,
   SheetContent,
   SheetDescription,
@@ -136,10 +143,23 @@ export function UpdatePerson({ children, person }: UpdatePersonProps) {
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Gender</FormLabel>
-                  <FormControl>
-                    <Input placeholder="Ex: Male" {...field} />
-                  </FormControl>
-                  <FormMessage />
+                  <Select
+                    onValueChange={field.onChange}
+                    defaultValue={field.value}
+                  >
+                    <FormControl>
+                      <SelectTrigger>
+                        <SelectValue placeholder="Select your gender" />
+                      </SelectTrigger>
+                    </FormControl>
+                    <SelectContent>
+                      <SelectItem value="Male">Male</SelectItem>
+                      <SelectItem value="Female">Female</SelectItem>
+                      <SelectItem value="Divorced">Divorced</SelectItem>
+                      <SelectItem value="Other">Other</SelectItem>
+                    </SelectContent>
+                    <FormMessage />
+                  </Select>
                 </FormItem>
               )}
             />
@@ -192,14 +212,25 @@ export function UpdatePerson({ children, person }: UpdatePersonProps) {
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Marital Status</FormLabel>
-                  <FormControl>
-                    <Input placeholder="Ex: Married" {...field} />
-                  </FormControl>
-                  <FormMessage />
+                  <Select
+                    onValueChange={field.onChange}
+                    defaultValue={field.value}
+                  >
+                    <FormControl>
+                      <SelectTrigger>
+                        <SelectValue placeholder="Select a marital status" />
+                      </SelectTrigger>
+                    </FormControl>
+                    <SelectContent>
+                      <SelectItem value="Single">Single</SelectItem>
+                      <SelectItem value="Married">Married</SelectItem>
+                      <SelectItem value="Divorced">Divorced</SelectItem>
+                    </SelectContent>
+                    <FormMessage />
+                  </Select>
                 </FormItem>
               )}
             />
-
             <div>
               <div className="mb-5 flex items-center justify-between p-2">
                 <h3 className="text-sm font-semibold">Location</h3>

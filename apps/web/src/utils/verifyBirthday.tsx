@@ -21,7 +21,7 @@ export function verifyBirthday(birthdayDate: Date) {
     nextBirthday.getMonth() === today.getMonth() &&
     nextBirthday.getDate() === today.getDate()
   ) {
-    return 'Happy Birthday! 🎉'
+    return 'Happy Birthday!'
   } else if (restDay === 1) {
     return 'Your birthday is tomorrow!'
   } else {

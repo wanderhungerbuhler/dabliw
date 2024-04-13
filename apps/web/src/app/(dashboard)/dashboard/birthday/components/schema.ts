@@ -11,7 +11,7 @@ export const PersonBodySchema = z.object({
     .string({
       required_error: 'Gender is required',
     })
-    .min(3),
+    .min(3, { message: 'Gender is required' }),
   birthdate: z.date({
     required_error: 'A date of birth is required.',
   }),
@@ -19,7 +19,7 @@ export const PersonBodySchema = z.object({
     .string({
       required_error: 'Marital status is required',
     })
-    .min(3),
+    .min(3, { message: 'Marital status is required' }),
   address: z.array(
     z.object({
       id: z.string().optional(),
