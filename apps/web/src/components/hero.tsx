@@ -5,7 +5,7 @@ import DabliwAnimationGIF from '../../public/dabliw-animation.gif'
 export function Hero() {
   return (
     <>
-      <div className="mb-5 flex items-center justify-center">
+      <div className="mb-5 flex items-center justify-center ">
         <Image
           src={DabliwAnimationGIF}
           width={100}
